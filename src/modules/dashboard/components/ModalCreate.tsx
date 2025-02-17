@@ -1,7 +1,7 @@
 import styles from './ModalCreate.module.css';
 import InputCustom from './InputCustom';
-import { useEffect, useRef, useState } from 'react';
-import { Divider, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDraggable, RadioGroup, Radio } from '@heroui/react';
+import { useEffect, useState } from 'react';
+import { Divider, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, RadioGroup, Radio } from '@heroui/react';
 
 
 
@@ -12,8 +12,8 @@ export default function ModalCreate({ isOpen, onClose, onCreate, dataStructure, 
     const [selectedCountry, setSelectedCountry] = useState('japan')
     const [errors, setErrors] = useState({});
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
-    const targetRef = useRef(null);
-    const { moveProps } = useDraggable({ targetRef, isDisabled: !isOpen });
+    // const targetRef = useRef(null);
+    // const { moveProps } = useDraggable({ targetRef, isDisabled: !isOpen });
 
     const region = {
         asia: 'Asia',
@@ -120,8 +120,6 @@ export default function ModalCreate({ isOpen, onClose, onCreate, dataStructure, 
         setSelectedCountry(e.target.value);
     };
 
-
-
     const handleSubmit = async () => {
         const formattedImageUrl = [
             imageUrls.map((item) => item.color),
@@ -195,7 +193,7 @@ export default function ModalCreate({ isOpen, onClose, onCreate, dataStructure, 
                 isOpen={isOpen}
                 onClose={onClose}
                 scrollBehavior='inside'
-                ref={targetRef}
+                // ref={targetRef}
                 classNames={{
                     wrapper: styles.modalWrapper,
                     base: styles.modalBase,
@@ -209,7 +207,7 @@ export default function ModalCreate({ isOpen, onClose, onCreate, dataStructure, 
                 <ModalContent>
                     {(onClose) => (
                         <>
-                            <ModalHeader {...moveProps}>Crear Nuevo Auto</ModalHeader>
+                            <ModalHeader /*{...moveProps}*/>Crear Nuevo Auto</ModalHeader>
                             <ModalBody>
                                 <div className={styles.formCard}>
                                     <span className={styles.sectionTitle}>Detalles</span>
