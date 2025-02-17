@@ -1,0 +1,42 @@
+@import "./variables.css";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap');
+
+body{
+    background-color: var(--night);
+    margin: 0;
+    padding: 0;
+
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+
+    overflow: hidden;
+}
+
+::-webkit-scrollbar{
+    width: 10px;
+}
+::-webkit-scrollbar-track{
+    background: var(--jet-gray);
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb{
+    background: var(--french-gray);
+    border: 1px solid var(--jet-gray);
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover{
+    cursor: pointer;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: none;
+}
