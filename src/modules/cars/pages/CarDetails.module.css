@@ -1,0 +1,98 @@
+.headerContainer{
+    height: 100px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    /* background: linear-gradient(0deg, rgba(0,0,0,.2) 0%, var(--gunmetal-gray) 10%); */
+    background-color: var(--gunmetal-gray);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+}
+
+.headerContainer .logoContainer{
+    width: 100px;
+    height: 100px;
+    /* background-color: #fff; */
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    overflow: hidden;
+}
+
+.headerContainer .logoContainer .logoImg{
+    width: 100%;
+    /* background-color: aqua; */
+}
+
+
+.contentContainer{
+    width: 100%;
+    height: calc(100vh - 100px);
+    padding: 100px 0 0 0 ;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.contentContainer .galleryContainer{
+    width: 60%;
+    margin-left: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.contentContainer .galleryContainer .galleryImage{
+    width: 100%;
+    object-fit: cover;
+}
+
+.contentContainer .infoContainer{
+    width: 40%;
+    padding-top: 100px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 40px;
+}
+
+.contentContainer .infoContainer span{
+    font-family: 'Montserrat', serif;
+    color: var(--jet-gray);
+}
+.contentContainer .infoContainer span:nth-child(n){
+    font-size: large;
+}
+.contentContainer .infoContainer span:first-child{
+    font-size: x-large;
+    font-weight: 500;
+}
+
+.contentContainer .infoContainer .colorSelector{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.contentContainer .infoContainer .colorSelector .colorOption{
+    width: 25px;
+    height: 25px;
+    background-color: #000;
+
+    border: 1px solid var(--lion);
+    border-radius: 100%;
+
+    cursor: pointer;
+}

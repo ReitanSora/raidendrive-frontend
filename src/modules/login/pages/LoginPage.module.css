@@ -1,0 +1,334 @@
+.container {
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.formCard {
+    position: relative;
+    width: 400px;
+    height: 65%;
+    background-color: var(--jet-gray);
+    padding: .3rem;
+    /* background-color: rgba(255, 255, 255, 0.2); */
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: space-evenly; */
+
+    /* border: 1px solid var(--light-white); */
+    border-radius: .5rem;
+
+    /* z-index: 1 */
+    /* box-shadow: 0px 0px 10px 1px var(--light-white); */
+}
+
+.card {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+@property --angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+.formCard::before,
+.formCard::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    background-image: conic-gradient(from var(--angle),
+            transparent 0deg 90deg,
+            /* Espacio transparente inicial */
+            var(--lion) 90deg 135deg,
+            /* Primera barra (45 grados de ancho) */
+            transparent 135deg 270deg,
+            /* Espacio de separación (135 grados) */
+            var(--lion) 270deg 315deg,
+            /* Segunda barra (45 grados de ancho) */
+            transparent 315deg 360deg
+            /* Espacio transparente final */
+        );
+    padding: 5px;
+
+    border-radius: .5rem;
+
+    translate: -50% -50%;
+
+    animation: 15s spin linear infinite;
+
+    z-index: -1;
+}
+
+.formCard::before {
+    filter: blur(1.5rem);
+    opacity: 0.6;
+}
+
+@keyframes spin {
+    from {
+        --angle: 0deg;
+    }
+
+    to {
+        --angle: 360deg;
+    }
+}
+
+
+.container .navigation {
+    width: 400px;
+    height: 3rem;
+    background-color: var(--gunmetal-gray);
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    border-radius: .5rem .5rem 0 0;
+}
+
+.container .navigation .navigationOption {
+    width: 50%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: .5rem .5rem 0 0;
+
+    cursor: pointer;
+}
+
+.container .navigation .navigationOption span {
+    font-weight: bold;
+}
+
+.formText {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+    user-select: none;
+}
+
+.formText span {
+    font-family: 'Montserrat', monospace;
+    color: var(--light-white);
+}
+
+.formText span:first-child {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.formText span:last-child {
+    font-size: 1.2rem;
+}
+
+.formInput {
+    width: 80%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.inputContainer {
+    position: relative;
+    width: 100%;
+    height: 50px;
+
+    border: 1px solid var(--mid-gray);
+    border-radius: .5rem;
+
+    transition: all .3s ease;
+}
+
+.inputContainer input {
+    position: absolute;
+    width: 80%;
+    height: 100%;
+    background: transparent;
+    margin-left: 10px;
+
+    font-family: 'Space mono', monospace;
+    font-size: 1rem;
+    color: var(--mid-gray);
+
+    border: none;
+
+    caret-color: var(--light-white);
+    outline: none;
+
+    z-index: 1;
+}
+
+.inputContainer label {
+    position: relative;
+    top: 1rem;
+    left: 1rem;
+    background-color: var(--jet-gray);
+    padding: 0px 5px;
+
+    border-radius: .5rem;
+
+    font-size: 1rem;
+    color: var(--mid-gray);
+
+    transition: all .3s ease;
+
+    user-select: none;
+}
+
+.inputContainer input:focus+label,
+.inputContainer input:not(:placeholder-shown)+label {
+    top: -10px;
+    font-size: .9rem;
+    z-index: 2;
+}
+
+.inputContainer input:focus+label {
+    font-weight: bold;
+    color: var(--light-white);
+}
+
+.inputContainer:focus-within {
+    border: 1px solid var(--light-white);
+}
+
+.inputContainer .revealPasswordButton {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--mid-gray);
+
+    cursor: pointer;
+}
+
+.formOptions {
+    width: 80%;
+    /* background-color: aqua; */
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    user-select: none;
+}
+
+.formOptions div:first-child {
+    text-align: end;
+}
+
+.formOptions div a {
+    font-family: 'Exo 2', monospace;
+    font-size: .8rem;
+    text-decoration: none;
+    color: var(--lion);
+}
+
+.submitButton {
+    position: relative;
+    height: 40px;
+    background-image: linear-gradient(150deg, var(--lion) 20%, var(--light-gray), var(--light-white));
+    padding: 5px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+    border-radius: .5rem;
+
+    cursor: pointer;
+    transition: all .3s;
+}
+
+.submitButtonDisabled {
+    cursor: default;
+}
+
+.submitButton span {
+    width: 100%;
+    height: 100%;
+    background-color: var(--jet-gray);
+
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--light-white);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: .5rem;
+
+    user-select: none;
+    transition: all .3s;
+}
+
+.submitButtonDisabled span {
+    color: var(--mid-gray);
+}
+
+.submitButton:hover span {
+    color: var(--jet-gray);
+
+    background-color: transparent;
+}
+
+.submitButtonDisabled:hover span {
+    color: var(--mid-gray);
+
+    background-color: var(--jet-gray);
+}
+
+.tooltipContainer {
+    position: absolute;
+    top: 0;
+    right: -10%;
+    width: 10%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tooltip {
+    background-color: var(--gunmetal-gray);
+
+    text-transform: none;
+    color: var(--light-gray);
+    font-size: 0.8rem;
+    padding: 8px 12px;
+
+    border-radius: .5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    white-space: nowrap;
+}

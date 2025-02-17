@@ -1,0 +1,84 @@
+.mainContainer {
+    width: 100%;
+    height: 100%;
+}
+
+.contentContainer {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--light-white);
+    padding: 20px 0 0 0;
+
+    font-size: 1.5rem;
+    text-transform: none;
+    color: var(--gunmetal-gray);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 30px;
+
+    z-index: -1;
+}
+
+.contentContainer .title{
+    width: 60%;
+    
+    font-size: 2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+}
+
+
+.chipBaseClient,
+.chipBaseAdmin {
+    height: 2rem;
+    padding: 0 10px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+
+    font-size: 1rem;
+
+    border-radius: 1rem;
+}
+
+.chipBaseAdmin {
+    background-color: color-mix(in srgb, var(--lion) 40%, transparent);
+
+    color: var(--light-gold);
+
+    border: 1px solid var(--light-gold);
+}
+
+.chipBaseClient {
+    background-color: color-mix(in srgb, var(--space-cadet-blue) 40%, transparent);
+
+    color: var(--light-blue);
+
+    border: 1px solid var(--light-blue);
+}
+
+.chipContent {
+    text-transform: capitalize;
+}
+
+.columnActions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    outline: none;
+}
+
+.columnActions div svg {
+    font-size: 1.5rem;
+    cursor: pointer;
+}

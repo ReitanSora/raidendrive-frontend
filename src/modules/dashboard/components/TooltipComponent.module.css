@@ -1,0 +1,10 @@
+.tooltipContent{
+    background-color: var(--gunmetal-gray);
+    text-transform: none;
+    color: var(--light-gray);
+    font-size: 0.8rem;
+    padding: 8px 12px;
+    border-radius: .5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    white-space: nowrap;
+}

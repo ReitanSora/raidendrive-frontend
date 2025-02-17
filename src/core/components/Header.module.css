@@ -1,0 +1,132 @@
+.headerContainer {
+    height: 100px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    /* background: linear-gradient(0deg, rgba(0,0,0,.2) 0%, var(--gunmetal-gray) 10%); */
+    background-color: var(--night);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    /* box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2); */
+    z-index: 100;
+
+    transition: filter .3s ease;
+}
+
+.headerContainer.blur {
+    filter: blur(5px)
+}
+
+.headerContainer .logoContainer {
+    width: 70px;
+    height: 70px;
+    margin-left: 20px;
+    background-color: var(--gunmetal-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    overflow: hidden;
+
+    transition: all .2s ease;
+}
+.headerContainer .logoContainer:hover{
+    box-shadow: 0px 0px 6px var(--light-white);
+}
+.headerContainer .logoContainer:active{
+    background-color: var(--mid-gray);
+}
+
+.headerContainer .logoContainer .logoImg {
+    width: 100%;
+    /* background-color: aqua; */
+}
+
+.headerLeft{
+    width: 70%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 40px;
+}
+
+.searchBarContainer {
+    position: relative;
+    width: 250px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.welcome{
+    color: var(--light-white);
+}
+
+.navbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.headerButtonContainer{
+    width: 30%;
+    margin-right: 20px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.headerButtonContainer .navbar a {
+    position: relative;
+    height: 1.5rem;
+
+    font-size: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+    white-space: nowrap;
+    color: var(--light-gray);
+
+    cursor: pointer;
+}
+
+.headerButtonContainer .navbar a::before{
+    content: '';
+    
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 4px;
+    background-color: var(--lion);
+
+    transition: all .3s ease;
+}
+
+.headerButtonContainer .navbar a:hover::before{
+    width: 100%;
+}
+
+.headerButtonContainer .headerButton {
+    width: 35px;
+    height: 35px;
+    background-color: var(--light-gray);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 100%;
+}
+
+.headerButtonIcon {
+    color: var(--gunmetal-gray);
+}

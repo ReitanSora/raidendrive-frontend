@@ -1,0 +1,285 @@
+.contentContainer {
+    /* min-height: 100vh; */
+    width: 100%;
+    padding: 100px 0 0 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    transition: filter .3s ease;
+}
+
+.contentContainer.blur {
+    filter: blur(5px)
+}
+
+.contentContainer .contentTitle {
+    /* background-color: antiquewhite; */
+    margin: 0px;
+    padding: 20px 0;
+
+    font-family: 'Exo 2', monospace;
+    font-size: 2rem;
+    font-weight: lighter;
+    color: var(--light-white);
+}
+
+.contentTitle .droppingText {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+    height: 3rem;
+
+    /* animation: bg 5s linear infinite; */
+}
+
+.contentTitle .droppingText > div {
+    margin-left: 15px;
+
+    font-family: 'Exo 2', monospace;
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+
+    opacity: 0;
+
+    position: absolute;
+    vertical-align: middle;
+}
+
+.contentTitle .droppingText>div:nth-child(1) {
+    animation: roll 5s linear infinite 0s;
+}
+
+.contentTitle .droppingText>div:nth-child(2) {
+    animation: roll 5s linear infinite 1s;
+}
+
+.contentTitle .droppingText>div:nth-child(3) {
+    animation: roll 5s linear infinite 2s;
+}
+
+.contentTitle .droppingText>div:nth-child(4) {
+    animation: roll2 5s linear infinite 3s;
+}
+
+@keyframes roll {
+    0% {
+        opacity: 0;
+        margin-top: -100px;
+    }
+
+    3% {
+        opacity: 1;
+    }
+
+    5% {
+        opacity: 1;
+        margin-top: 0px;
+    }
+
+    20% {
+        opacity: 1;
+        margin-top: 0px;
+    }
+
+    27% {
+        opacity: 0;
+        margin-top: 20px;
+    }
+
+    100% {
+        opacity: 0;
+        margin-top: 100px;
+    }
+}
+
+@keyframes roll2 {
+    0% {
+        opacity: 0;
+        margin-top: 50px;
+    }
+
+    3% {
+        opacity: 1;
+    }
+
+    5% {
+        opacity: 1;
+        margin-top: 0px;
+    }
+
+    30% {
+        opacity: 1;
+        margin-top: 0px;
+    }
+
+    37% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0;
+        margin-top: -100px;
+    }
+}
+/* .contentContainer .contentTitle h2{
+    font-family: 'Montserrat', serif;
+    font-weight: lighter;
+    font-size: 2rem;
+    color: var(--jet-gray);
+} */
+
+.contentContainer .contentElementsContainer {
+    max-width: 75%;
+    margin: 20px 0;
+
+    display: grid;
+    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+
+.modalBackground {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: filter 0.3s ease;
+
+    z-index: 2000;
+}
+
+.modalContainer {
+    width: 90%;
+    height: 70%;
+    background-color: var(--jet-gray);
+    padding: 10px;
+
+    border-radius: 5px;
+
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    overflow: hidden;
+
+    z-index: 200;
+}
+
+.modalContainer .modalImageContainer {
+    width: 75%;
+    height: 100%;
+    background-color: #000;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.modalContainer .modalImageContainer img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.modalContainer .modalInfoButtonContainer {
+    width: 25%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+}
+
+.modalContainer .modalInfoButtonContainer .modalInfoContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.modalContainer .modalInfoButtonContainer .modalInfoContainer .carSpec span:nth-child(n) {
+    font-size: large;
+    font-family: "Montserrat", serif;
+    font-weight: bold;
+    color: var(--french-gray);
+    margin-bottom: 30px;
+
+}
+
+.carSpec {
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.modalContainer .modalInfoButtonContainer .modalInfoContainer .carSpec span:nth-child(2n) {
+    text-align: right;
+    font-weight: normal;
+}
+
+.modalContainer .modalInfoButtonContainer .modalInfoContainer span:first-child {
+    font-family: "Montserrat", serif;
+    font-size: xx-large;
+    font-weight: bold;
+    color: var(--light-gray);
+    margin-bottom: 10px;
+}
+
+.modalContainer .modalInfoButtonContainer .modalButtonContainer {
+    width: 100%;
+    /* background-color: #fff; */
+
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
+}
+
+.modalContainer .modalInfoButtonContainer .modalButtonContainer div {
+    width: 100px;
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: "Montserrat", serif;
+    font-size: large;
+    font-weight: normal;
+    color: var(--light-gray);
+
+    border: 1px solid var(--mid-gray);
+    border-radius: 3px;
+
+    cursor: pointer;
+}
+
+.modalContainer .modalInfoButtonContainer .modalButtonContainer .cancelButton {
+    background-color: var(--gunmetal-gray);
+}
+
+.modalContainer .modalInfoButtonContainer .modalButtonContainer .buyButton {
+    background-color: var(--lion);
+
+    border: 1px solid var(--lion);
+}
+
+.modalContainer .modalInfoButtonContainer .modalButtonContainer .buyButtonLink {
+    text-decoration: none;
+}

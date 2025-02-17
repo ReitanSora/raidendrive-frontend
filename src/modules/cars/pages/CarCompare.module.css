@@ -1,0 +1,216 @@
+.headerContainer{
+    height: 100px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    /* background: linear-gradient(0deg, rgba(0,0,0,.2) 0%, var(--gunmetal-gray) 10%); */
+    background-color: var(--gunmetal-gray);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+
+    transition: filter .3s ease;
+}
+
+.headerContainer .logoContainer{
+    width: 100px;
+    height: 100px;
+    /* background-color: #fff; */
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    overflow: hidden;
+}
+
+.headerContainer .logoContainer .logoImg{
+    width: 100%;
+    /* background-color: aqua; */
+}
+
+.contentContainer {
+    width: 100%;
+    height: 100%;
+    padding-top: 100px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.contentContainer .contentTitle{
+    padding: 20px 0;
+    align-self: center;
+}
+
+.contentContainer .contentTitle h2{
+    font-family: 'Montserrat', serif;
+    font-size: x-large;
+    color: var(--jet-gray);
+}
+
+.comparationContainer{
+    width: 100%;
+    max-height: 100%;
+
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.infoContainer{
+    position: relative;
+    width: 33%;
+    height: calc(100vh - 300px);
+    padding: 0 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    overflow: auto;
+}
+
+.radarChartContainer{
+    width: 33%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dropMenuContainer {
+}
+
+.contentContainer .infoContainer .dropMenuContainer .dropMenuButton{
+    font-family: 'Montserrat', serif;
+    font-size: medium;
+    color: var(--light-gray);
+    text-overflow: ellipsis;
+    text-align: center;
+    white-space: nowrap;
+
+    position: relative;
+    width: 150px;
+    background-color: var(--jet-gray);
+    padding: 10px 15px;
+
+    overflow: hidden;
+    
+    border-radius: 5px;
+    
+    cursor: pointer;    
+    transition: background-color .2s ease-in-out;
+}
+.contentContainer .infoContainer .dropMenuContainer .dropMenuButton:hover {
+    background-color: var(--mid-gray); /* Un poco más claro al pasar el mouse */
+}
+
+.contentContainer .infoContainer .dropMenuContainer .dropMenuItems {
+    position: absolute;
+    width: 180px;
+    max-height: 500px;
+    background: var(--light-gray);
+    margin: 2px 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    border: 2px solid var(--jet-gray);
+    border-radius: 8px;
+    
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 200;
+}
+
+
+
+.contentContainer .infoContainer .dropMenuContainer .dropMenuItems .menuItem{
+    position: relative;
+    width: 95%;
+    height: 25px;
+    margin: 10px 0;
+
+    font-family: 'Montserrat', serif;
+    font-size: medium;
+    color: var(--gunmetal-gray);
+    text-overflow: ellipsis;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+
+    border-bottom: 1px solid var(--mid-gray);
+
+    cursor: pointer;
+}
+
+.contentContainer .infoContainer .carInfoContainer {
+    width: fit-content;
+    height: fit-content;
+    padding-right: 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 20px;
+    overflow-y: scroll;
+}
+
+.contentContainer .comparationContainer .infoContainer .imageContainer{
+    position: absolute;
+    width: 450px;
+    height: 250px;
+
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+    border-radius: 5px;
+}
+
+.contentContainer .infoContainer .imageContainer img{
+    width: 100%;
+
+    object-fit: contain;
+}
+
+.contentContainer .carInfoContainer .technicalInfo{
+    width: 450px;
+    height: fit-content;
+    padding-top: 270px;
+}
+
+.carSpec span:nth-child(n){
+    font-size: medium;
+    font-family: "Montserrat", serif;
+    font-weight: bold;
+    color: var(--jet-gray);
+    margin-bottom: 30px;
+    
+}
+
+.carSpec{
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.carSpec span:nth-child(2n){
+    text-align: right;
+    font-weight: normal;
+}

@@ -1,0 +1,345 @@
+.formCard {
+    position: relative;
+    width: 100%;
+    height: 60%;
+    background-color: var(--jet-gray);
+    /* box-shadow: 0px 0px 10px 1px var(--light-white); */
+}
+
+.formCard .sectionTitle{
+    font-size: 1.2rem;
+    color: var(--mid-gray);
+}
+
+.card {
+    margin: 20px 0;
+
+    display: grid;
+    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+}
+
+.formInput {
+    width: 80%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.modalWrapper{
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modalBase {
+    position: relative;
+    width: 60%;
+    height: 80%;
+    background: var(--jet-gray);
+    padding: 10px;
+
+    border-radius: .5rem;
+
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    outline: none;
+}
+
+.modalBackdrop {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    /* backdrop-filter: blur(10px); */
+}
+
+.modalContent {
+    width: 60%;
+    height: 80%;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    display: flex;
+    overflow: auto;
+    width: 400px;
+    max-width: 90%;
+}
+
+.modalHeader {
+    padding: 20px;
+
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--success);
+
+    /* border-bottom: 1px solid var(--mid-gray); */
+}
+
+.modalBody {
+    max-width: 100%;
+    max-height: 80%;
+    padding: 10px 30px;
+
+    font-size: 1rem;
+    text-transform: none;
+    line-height: 2rem;
+    color: var(--french-gray);
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    overflow: auto;
+}
+
+.modalUserInfo{
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+
+.modalFooter {
+    padding: 20px;
+    /* background-color: #f9f9f9; */
+    /* border-top: 1px solid var(--mid-gray); */
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.modalFooter button{
+    background-color: color-mix(in srgb, var(--mid-gray) 30%, transparent);
+    padding: 7px 15px;
+
+    font-family: 'Exo 2', monospace;
+    font-size: 1.1rem;
+    line-height: 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: .5rem;
+
+    cursor: pointer;
+    outline: none;
+}
+
+.modalFooter button:first-child{
+    color: var(--mid-gray);
+
+    border: 1px solid var(--mid-gray);
+}
+
+.modalFooter .createButton{
+    background-color: color-mix(in srgb, var(--success) 50%, transparent);
+    color: var(--light-white);
+
+    border: 1px solid var(--success);
+}
+
+.modalFooter .createButtonDisabled{
+    background-color: var(--mid-gray);
+
+    user-select: none;
+    cursor: default;
+}
+.modalCloseButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 36px;
+    height: 36px;
+    background-color: transparent;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 100%;
+    
+    transition: all .3s ease;
+    cursor: pointer;
+}
+.modalCloseButton svg{
+    font-size: 24px;
+    color: var(--french-gray);
+}
+.modalCloseButton:hover{
+    background-color: var(--mid-gray);
+}
+
+/* Divider */
+.formCard .divider{
+    height: 1px;
+    background-color: var(--mid-gray);
+
+    border: none;
+}
+
+/* Image Uploader */
+.imageSection{
+    width: 100%;
+    margin: 20px 0;
+}
+.imageSection span{
+    font-size: 1.2rem;
+    color: var(--mid-gray);
+}
+
+.imageSection .imageUploader {
+    margin: 20px 0;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 20px;
+}
+
+.imageSection .colorSection {
+    width: 60%;
+    /* background-color: aquamarine; */
+    
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 20px;
+}
+
+.imageSection .formInput{
+    width: 50%;
+    margin-right: 40px;
+}
+
+.imageSection .colorItem{
+    width: 100%;
+    /* background-color: black; */
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.imageSection .imageItem {
+    width: 100%;
+    height: 50px;
+    /* background-color: aqua; */
+    margin-left: 30px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.imageSection .imagePreview {
+    width: 100px;
+
+    border-radius: .5rem;
+
+    object-fit: cover;
+}
+
+.imageSection button{
+    width: fit-content;
+    height: 30px;
+    padding: 5px 10px;
+    
+    font-size: 1rem;
+    color: var(--light-gray);
+
+    border: none;
+    border-radius: .5rem;
+
+    outline: none;
+    cursor: pointer;
+}
+
+.imageSection .deleteColor{
+    background-color: var(--red);
+}
+.imageSection .deleteImageUrl{
+    background-color: color-mix(in srgb, var(--red) 50%, transparent);
+}
+.imageSection .addImageUrl{
+    background-color: color-mix(in srgb, var(--light-blue) 50%, transparent);
+    margin-left: 30px;
+}
+.imageSection .addColor{
+    background-color: var(--light-blue);
+}
+
+/* RadioGroup */
+
+.radioGroupContainer{
+    /* background-color: aqua; */
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+.radioGroupBase{
+    width: 100%;
+    /* background-color: beige; */
+    
+}
+.radioGroupWrapper{
+    /* background-color: black; */
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+}
+.radioGroupLabel{
+    font-size: 1.2rem;
+    color: var(--mid-gray);
+}
+
+/* Radio */
+.radioBase{
+    /* background-color: black; */
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.radioWrapper{
+    /* background-color: aliceblue; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.radioLabelWrapper{
+    width: 80px;
+    /* background-color: aliceblue; */
+
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    overflow: hidden;
+}
+.radioLabel{
+    font-size: 1.1rem;
+    color: var(--light-gray);
+}
