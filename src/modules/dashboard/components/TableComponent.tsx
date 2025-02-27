@@ -11,9 +11,6 @@ interface TableComponentProps {
     searchColumnTerm: string
     isPossibleCreate: boolean;
     onOpen?: () => void;
-    isOpen?: boolean;
-    onClose?: () => void;
-    onCreate?: () => void;
     data: [];
 }
 
@@ -25,9 +22,6 @@ export default function TableComponent({
     searchColumnTerm,
     isPossibleCreate,
     onOpen,
-    isOpen,
-    onClose,
-    onCreate,
     data,
 }: TableComponentProps) {
     const [selectedKeys, setSelectedKeys] = useState(new Set([]));
@@ -107,7 +101,7 @@ export default function TableComponent({
                                 selectedKeys={selectedKeys}
                                 selectionMode="multiple"
                                 variant="flat"
-                                onSelectionChange={(keys) => {// Obtenemos el label seleccionado
+                                onSelectionChange={(keys) => {
                                     setSelectedKeys(keys);
                                 }}
                                 classNames={{
@@ -170,7 +164,7 @@ export default function TableComponent({
                             {[5, 10].map((option) => (
                                 <DropdownItem
                                     key={String(option)}
-                                    textValue={option} registros
+                                    textValue={`${option} registros`}
                                     value={String(option)}
                                     classNames={{
                                         base: styles.dropDownItemBase,
