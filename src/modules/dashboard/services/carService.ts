@@ -1,6 +1,6 @@
 import { fetcher } from "../../../services/api";
 
-const BASE_URL = 'http://127.0.0.1:3000/cars';
+const BASE_URL = 'http://localhost/apicar/cars';
 
 export const CarService = {
     findAll: async (token: string) => {
