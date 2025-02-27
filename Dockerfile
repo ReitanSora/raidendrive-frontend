@@ -1,4 +1,4 @@
-FROM node:22-alpine
+FROM node:22-alpine AS builder
 
 WORKDIR /app
 
@@ -11,6 +11,7 @@ RUN pnpm install
 
 COPY . .
 
-EXPOSE 5173
+RUN pnpm run build
 
-CMD [ "npm", "run", "dev" ]
+FROM nginx:alpine
+COPY --from=builder /app/dist /usr/share/nginx/html
