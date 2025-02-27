@@ -13,6 +13,7 @@ import PublicAndClientRoute from "./PublicAndClientRoute";
 import UsersPage from "../modules/dashboard/pages/UsersPage";
 import DashboardPage from "../modules/dashboard/pages/DashboardPage";
 import CarsPage from "../modules/dashboard/pages/CarsPage";
+import ReportsPage from "../modules/dashboard/pages/ReportsPage";
 
 const router = createBrowserRouter([
     {
@@ -72,6 +73,11 @@ const router = createBrowserRouter([
                 path: 'cars',
                 element: <CarsPage />,
                 errorElement: <NotFoundPage />
+            },
+            {
+                path: 'reports',
+                element: <ReportsPage/>,
+                errorElement: <NotFoundPage/>
             },
         ]
     }
