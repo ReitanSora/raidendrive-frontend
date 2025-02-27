@@ -6,8 +6,27 @@ import {
     ModalFooter,
 } from "@heroui/react";
 import styles from './ModalDelete.module.css';
+import { AlertMessageInterface } from "../utils/AlertMessageInterface";
 
-export default function ModalDelete({ isOpen, onClose, onDelete, id }) {
+interface ModalDeleteProps {
+    isOpen: boolean;
+    onClose: () => void;
+    onDelete: (id: string) => void;
+    id: string;
+    sendDataToParent: (data: AlertMessageInterface) => void;
+}
+
+export default function ModalDelete({ isOpen, onClose, onDelete, id, sendDataToParent }: ModalDeleteProps) {
+
+    const handleSubmit = async (id: string) => {
+        try {
+            onClose();
+            await onDelete(id);
+            sendDataToParent({deleteSuccess: true})
+        } catch {
+            sendDataToParent({ unknownError: true })
+        }
+    };
 
     return (
         <div className={styles.modalContainer}>
@@ -31,33 +50,12 @@ export default function ModalDelete({ isOpen, onClose, onDelete, id }) {
                             <ModalHeader>Confirmar eliminación</ModalHeader>
                             <ModalBody>
                                 <span>Está seguro que desea eliminar el registro</span>
-                                {/* <div className={styles.modalUserInfo}>
-                                    <span>Id:</span>
-                                    <span>{data.user_id}</span>
-                                </div>
-                                <div className={styles.modalUserInfo}>
-                                    <span>Nickname:</span>
-                                    <span>{data.user_nickname}</span>
-                                </div>
-                                <div className={styles.modalUserInfo}>
-                                    <span>Correo:</span>
-                                    <span>{data.user_email}</span>
-                                </div>
-                                <div className={styles.modalUserInfo}>
-                                    <span>Rol:</span>
-                                    <span>{data.user_role}</span>
-                                </div> */}
                             </ModalBody>
                             <ModalFooter>
                                 <button onClick={onClose}>
                                     Cancelar
                                 </button>
-                                <button onClick={async () => {
-                                    if (id && onDelete) {
-                                        await onDelete(id);
-                                    }
-                                    onClose();
-                                }}>
+                                <button onClick={async () => handleSubmit(id)}>
                                     Eliminar
                                 </button>
                             </ModalFooter>

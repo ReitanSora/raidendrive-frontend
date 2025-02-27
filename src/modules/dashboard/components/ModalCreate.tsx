@@ -1,11 +1,18 @@
 import styles from './ModalCreate.module.css';
 import InputCustom from './InputCustom';
-import { useEffect, useState } from 'react';
+import { SetStateAction, useEffect, useState } from 'react';
 import { Divider, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, RadioGroup, Radio } from '@heroui/react';
+import { AlertMessageInterface } from '../utils/AlertMessageInterface';
 
+interface ModalCreateProps {
+    isOpen: boolean;
+    onClose: () => void;
+    onCreate: (finalData: object, region: string, country: string) => void;
+    dataStructure: object;
+    sendDataToParent: (data: AlertMessageInterface) => void;
+}
 
-
-export default function ModalCreate({ isOpen, onClose, onCreate, dataStructure, sendDataToParent }) {
+export default function ModalCreate({ isOpen, onClose, onCreate, dataStructure, sendDataToParent }: ModalCreateProps) {
     const [formData, setFormData] = useState({});
     const [imageUrls, setImageUrls] = useState<{ color: string; urls: string[] }[]>([]);
     const [selectedRegion, setSelectedRegion] = useState('asia')
@@ -47,7 +54,7 @@ export default function ModalCreate({ isOpen, onClose, onCreate, dataStructure, 
         }
     }, [dataStructure]);
 
-    const handleInputChange = (key, value) => {
+    const handleInputChange = (key: string, value: string) => {
         const expectedType = typeof dataStructure[key];
         let convertedValue = value;
 
@@ -105,7 +112,7 @@ export default function ModalCreate({ isOpen, onClose, onCreate, dataStructure, 
         });
     };
 
-    const handleRegionChange = (e) => {
+    const handleRegionChange = (e: { target: { value: any; }; }) => {
         const region = e.target.value;
         setSelectedRegion(region);
 
@@ -116,7 +123,7 @@ export default function ModalCreate({ isOpen, onClose, onCreate, dataStructure, 
         }
     };
 
-    const handleCountryChange = (e) => {
+    const handleCountryChange = (e: { target: { value: SetStateAction<string>; }; }) => {
         setSelectedCountry(e.target.value);
     };
 
@@ -134,11 +141,11 @@ export default function ModalCreate({ isOpen, onClose, onCreate, dataStructure, 
         };
 
         if (Object.values(errors).every((error) => error === '')) {
+            onClose();
+            await onCreate(finalData, selectedRegion, selectedCountry);
             sendDataToParent({
                 createSuccess: true
             })
-            onClose();
-            await onCreate(finalData, selectedRegion, selectedCountry);
             setFormData({});
             setImageUrls([]);
             setIsSubmitDisabled(true)
@@ -241,7 +248,7 @@ export default function ModalCreate({ isOpen, onClose, onCreate, dataStructure, 
                                                                 label={'Color'}
                                                                 error={errors['image_url']}
                                                                 value={item.color}
-                                                                onChange={(e) => handleUpdateColor(colorIndex, e.target.value)}
+                                                                onChange={(e: { target: { value: string; }; }) => handleUpdateColor(colorIndex, e.target.value)}
                                                                 onKeyUp={validateForm}
                                                                 readonly={false}
                                                             />
@@ -260,7 +267,7 @@ export default function ModalCreate({ isOpen, onClose, onCreate, dataStructure, 
                                                                     label={'image_url'}
                                                                     error={errors['image_url']}
                                                                     value={url}
-                                                                    onChange={(e) => {
+                                                                    onChange={(e: { target: { value: any; }; }) => {
                                                                         const newUrl = e.target.value;
                                                                         setImageUrls((prev) => {
                                                                             const updatedImageUrls = [...prev];
@@ -307,15 +314,15 @@ export default function ModalCreate({ isOpen, onClose, onCreate, dataStructure, 
                                             }}>
                                             {Object.entries(region).map(([key, value]) => (
                                                 <Radio
-                                                key={key}
-                                                value={key}
-                                                classNames={{
-                                                    base: styles.radioBase,
-                                                    wrapper: styles.radioWrapper,
-                                                    labelWrapper: styles.radioLabelWrapper,
-                                                    label: styles.radioLabel,
-                                                    control: styles.radioControl,
-                                                }}>
+                                                    key={key}
+                                                    value={key}
+                                                    classNames={{
+                                                        base: styles.radioBase,
+                                                        wrapper: styles.radioWrapper,
+                                                        labelWrapper: styles.radioLabelWrapper,
+                                                        label: styles.radioLabel,
+                                                        control: styles.radioControl,
+                                                    }}>
                                                     {value}
                                                 </Radio>
                                             ))}
@@ -333,15 +340,15 @@ export default function ModalCreate({ isOpen, onClose, onCreate, dataStructure, 
                                                 }}>
                                                 {Object.entries(country[selectedRegion]).map(([key, value]) => (
                                                     <Radio
-                                                    key={key}
-                                                    value={key}
-                                                    classNames={{
-                                                        base: styles.radioBase,
-                                                        wrapper: styles.radioWrapper,
-                                                        labelWrapper: styles.radioLabelWrapper,
-                                                        label: styles.radioLabel,
-                                                        control: styles.radioControl,
-                                                    }}>
+                                                        key={key}
+                                                        value={key}
+                                                        classNames={{
+                                                            base: styles.radioBase,
+                                                            wrapper: styles.radioWrapper,
+                                                            labelWrapper: styles.radioLabelWrapper,
+                                                            label: styles.radioLabel,
+                                                            control: styles.radioControl,
+                                                        }}>
                                                         {value}
                                                     </Radio>
                                                 ))}

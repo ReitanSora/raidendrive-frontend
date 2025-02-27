@@ -2,18 +2,20 @@ import styles from './ModalEdit.module.css';
 import InputCustom from './InputCustom';
 import { useEffect, useState } from 'react';
 import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@heroui/react';
+import { AlertMessageInterface } from '../utils/AlertMessageInterface';
 
 interface ModalEditProps {
     isOpen: boolean,
-    onClose: () => void,
-    onEdit: () => void,
-    editableFields: string[],
-    idKey: string,
-    fieldTypes?: Record<any, any>,
-    data: object,
+    onClose: () => void;
+    onEdit: (id: string, data: object) => void;
+    editableFields: string[];
+    idKey: string;
+    fieldTypes?: Record<number, string>;
+    data: object;
+    sendDataToParent: (data: AlertMessageInterface) => void;
 }
 
-export default function ModalEdit({ isOpen, onClose, onEdit, editableFields, idKey, fieldTypes, data }: ModalEditProps) {
+export default function ModalEdit({ isOpen, onClose, onEdit, editableFields, idKey, fieldTypes, data, sendDataToParent }: ModalEditProps) {
     const [formData, setFormData] = useState(() => {
         const initialData: Record<string, any> = {};
         editableFields.forEach((key) => {
@@ -34,7 +36,7 @@ export default function ModalEdit({ isOpen, onClose, onEdit, editableFields, idK
             const filteredData = Object.fromEntries(
                 editableFields.map((key) => {
                     // console.log(typeof formData[key] === 'number' ? 'number' : 'text')
-                    return [key, key in data? data[key]: '']
+                    return [key, key in data ? data[key] : '']
                 })
             )
             // console.log(filteredData);
@@ -42,26 +44,41 @@ export default function ModalEdit({ isOpen, onClose, onEdit, editableFields, idK
         }
     }, [data, editableFields]);
 
-    const handleInputChange = (key: string, value: any) => {
+    const handleInputChange = (key: string, value: string | number) => {
         const expectedType = fieldTypes[key] || 'string'; // Usa el tipo del esquema o 'string' por defecto
-    
+
         // Convierte el valor al tipo esperado
         let convertedValue: any = value;
         if (expectedType === 'number') {
             convertedValue = value === '' ? null : Number(value); // Maneja números vacíos como `null`
         }
-    
-        console.log(`Campo: ${key}, Valor: ${convertedValue}, Tipo: ${typeof convertedValue}`);
-    
+
+        // console.log(`Campo: ${key}, Valor: ${convertedValue}, Tipo: ${typeof convertedValue}`);
+
         setFormData((prevData) => ({
             ...prevData,
             [key]: convertedValue,
         }));
-    
+
         setErrors((prevErrors) => ({
             ...prevErrors,
             [key]: '',
         }));
+    };
+
+    const handleSubmit = async (id: string, data: object) => {
+        try {
+            if (Object.values(errors).every((error) => error === '')) {
+                onClose()
+                await onEdit(id, data);
+                sendDataToParent({ editSuccess: true })
+            } else {
+                sendDataToParent({ validationFailed: true })
+            }
+        } catch (error) {
+            console.log(error)
+            sendDataToParent({ unknownError: true })
+        }
     };
 
     const validateForm = () => {
@@ -69,7 +86,7 @@ export default function ModalEdit({ isOpen, onClose, onEdit, editableFields, idK
         editableFields.forEach((key) => {
             const value = formData[key];
             const expectedType = fieldTypes[key] || 'string';
-    
+
             if (!value && expectedType !== 'number') {
                 // Si el campo no es numérico y está vacío, marca un error
                 newErrors[key] = 'Este campo no puede estar vacío';
@@ -78,12 +95,10 @@ export default function ModalEdit({ isOpen, onClose, onEdit, editableFields, idK
                 newErrors[key] = 'Este campo debe ser un número válido';
             }
         });
-    
+
         setErrors(newErrors);
         setIsSubmitDisabled(Object.values(newErrors).some(error => error !== ''));
     };
-
-    
 
     return (
         <div className={styles.modalContainer}>
@@ -128,13 +143,7 @@ export default function ModalEdit({ isOpen, onClose, onEdit, editableFields, idK
                                 <button onClick={onClose}>
                                     Cancelar
                                 </button>
-                                <button disabled={isSubmitDisabled} onClick={async () => {
-                                    if (onEdit) {
-                                        await onEdit(data[idKey], formData);
-                                        console.log('editando...')
-                                    }
-                                    onClose();
-                                }}>
+                                <button disabled={isSubmitDisabled} onClick={async () => handleSubmit(data[idKey], formData)}>
                                     Aceptar
                                 </button>
                             </ModalFooter>
