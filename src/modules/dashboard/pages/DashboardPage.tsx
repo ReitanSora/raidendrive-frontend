@@ -18,6 +18,7 @@ import { FaCar, FaUsers } from "react-icons/fa";
 import { TbActivity } from "react-icons/tb";
 import { UserService } from "../services/userService";
 import DrawerComponent from "../components/DrawerComponent";
+import { CarService } from "../services/carService";
 
 export default function DashboardPage(params) {
     useTitle('RaidenDrive - Dashboard');
@@ -26,6 +27,7 @@ export default function DashboardPage(params) {
     const { token, logout } = useAuth();
     const [currentDate, setCurrentDate] = useState(new Date())
     const [usersCount, setUsersCount] = useState(0);
+    const [carsCount, setCarsCount] = useState(0);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -39,6 +41,8 @@ export default function DashboardPage(params) {
         const countUsers = async () => {
             try {
                 const users = await UserService.findAll(token);
+                const cars = await CarService.findAll(token);
+                setCarsCount(cars.length);
                 setUsersCount(users.length);
             } catch (error) {
                 if (error instanceof Error) {
@@ -75,7 +79,7 @@ export default function DashboardPage(params) {
                     </div>
                     <div className={styles.summaryElement}>
                         <FaCar />
-                        <span>10 Autos a la venta</span>
+                        <span>{`${carsCount} Autos a la venta`}</span>
                     </div>
                 </div>
                 <div className={styles.recentActivity}>

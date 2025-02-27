@@ -13,6 +13,7 @@ import ModalDelete from "../components/ModalDelete";
 import ModalEdit from "../components/ModalEdit";
 import TableComponent from "../components/TableComponent";
 import useTitle from "../../../hooks/useTitle";
+import AlertMessage from "../components/AlertMessage";
 
 const columns = [
     {
@@ -41,7 +42,7 @@ const columns = [
     },
 ];
 
-const inferFieldTypes = (data: Record<string, any>) => {
+const inferFieldTypes = (data: Record<string, never>) => {
     const types: Record<string, 'number' | 'string'> = {};
     for (const key in data) {
         if (typeof data[key] === 'number') {
@@ -53,7 +54,7 @@ const inferFieldTypes = (data: Record<string, any>) => {
     return types;
 };
 
-export default function UsersPage(params) {
+export default function UsersPage() {
     useTitle('RaidenDrive - Usuarios')
     const context = useOutletContext();
     const [fieldTypes, setFieldTypes] = useState<Record<string, 'number' | 'string'>>({});
@@ -61,12 +62,18 @@ export default function UsersPage(params) {
     const { token, logout } = useAuth();
     const [selectedUser, setSelectedUser] = useState(null);
     const [selectedUserEdit, setSelectedUserEdit] = useState(null);
+    const [managementData, setManagementData] = useState({
+        validationFailed: false,
+        createSuccess: false,
+        editSuccess: false,
+        deleteSuccess: false,
+        unkownError: false,
+    })
     const {
         isOpen: isModaDeletelOpen,
         onOpen: onModalDeleteOpen,
         onClose: onModalDeleteClose,
     } = useDisclosure();
-
     const {
         isOpen: isDrawerOpen,
         onOpen: onDrawerOpen,
@@ -78,19 +85,32 @@ export default function UsersPage(params) {
         onClose: onModalEditClose,
     } = useDisclosure();
 
+    const handleDataFromChild = (data: object) => {
+        setManagementData(data);
+    };
 
-
+    const resetManagementData = () => {
+        setManagementData({
+            validationFailed: false,
+            createSuccess: false,
+            editSuccess: false,
+            deleteSuccess: false,
+            unkownError: false,
+        });
+    };
 
     const handleOpenModalConfirm = (user) => {
         setSelectedUser(user);
         onModalDeleteOpen();
     };
+
     const handleOpenModalEdit = (user) => {
         setSelectedUserEdit(user);
         onModalEditOpen();
     }
-    const editableFields = ['user_role']
-    const handleEdit = async (userId: string, data) => {
+
+    const editableFields = ['user_role'];
+    const handleEdit = async (userId: string, data: any) => {
         try {
             await UserService.edit(userId, data.user_role, token);
             setUsers((prevUsers) =>
@@ -100,7 +120,7 @@ export default function UsersPage(params) {
             );
 
             setSelectedUser(null);
-            console.log(`Usuario con ID ${userId} editado correctamente`);
+            // console.log(`Usuario con ID ${userId} editado correctamente`);
         } catch (error) {
             console.error("Error al modificar el usuario:", error);
         }
@@ -112,7 +132,7 @@ export default function UsersPage(params) {
 
             setUsers((prevUsers) => prevUsers.filter((user) => user.user_id !== userId));
             setSelectedUser(null);
-            console.log(`Usuario con ID ${userId} eliminado correctamente`);
+            // console.log(`Usuario con ID ${userId} eliminado correctamente`);
         } catch (error) {
             console.error("Error al eliminar el usuario:", error);
         }
@@ -207,6 +227,13 @@ export default function UsersPage(params) {
             <HeaderDashboard context={context} onOpen={onDrawerOpen} logout={logout}></HeaderDashboard>
             <DrawerComponent isOpen={isDrawerOpen} onOpenChange={onDrawerOpenChange}></DrawerComponent>
             <div className={styles.contentContainer}>
+                <AlertMessage
+                    validationFailed={managementData.validationFailed}
+                    createSuccess={managementData.createSuccess}
+                    editSuccess={managementData.editSuccess}
+                    deleteSuccess={managementData.deleteSuccess}
+                    unkownError={managementData.unkownError}
+                    onAlertClose={resetManagementData} />
                 <span className={styles.title}>Administración de Usuarios</span>
                 <TableComponent
                     columns={columns}
@@ -222,6 +249,7 @@ export default function UsersPage(params) {
                 onClose={onModalDeleteClose}
                 id={selectedUser?.user_id || ''}
                 onDelete={handleDelete}
+                sendDataToParent={handleDataFromChild}
             />
             <ModalEdit
                 isOpen={isModalEditOpen}
@@ -231,6 +259,7 @@ export default function UsersPage(params) {
                 idKey={'user_id'}
                 onEdit={handleEdit}
                 fieldTypes={fieldTypes}
+                sendDataToParent={handleDataFromChild}
             />
         </div>
     );

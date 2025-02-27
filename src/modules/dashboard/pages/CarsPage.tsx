@@ -261,11 +261,10 @@ const normalizeCarData = (car: any) => {
     return normalizedData;
 };
 
-export default function CarsPage(params) {
+export default function CarsPage() {
     useTitle('RaidenDrive - Autos')
     const editableFields = ['price', 'description']
     const context = useOutletContext();
-    const [cars, setCars] = useState([]);
     const [normalizedCars, setNormalizedCars] = useState([]);
     const { token, logout } = useAuth();
     const [selectedCar, setSelectedCar] = useState(null);
@@ -309,10 +308,9 @@ export default function CarsPage(params) {
 
     const handleCreate = async (newCarData, region, country) => {
         try {
-            const response = await CarService.create(newCarData, region, country, token);
-            setCars((prevCars) => [...prevCars, response]);
-            setNormalizedCars((prevNormalizedCars) => [...prevNormalizedCars, response]);
-            console.log('Nuevo auto:', newCarData);
+            await CarService.create(newCarData, region, country, token);
+            const response = await CarService.findAll(token);
+            setNormalizedCars(response.map(normalizeCarData))
         } catch (error) {
             console.error('Error al crear el auto:', error);
             setManagementData({
@@ -321,15 +319,10 @@ export default function CarsPage(params) {
         }
     };
 
-    const handleEdit = async (carId: string, data) => {
+    const handleEdit = async (carId: string, data: object) => {
         try {
             // console.log('Data editada',data)
             await CarService.edit(carId, data, token);
-            setCars((prevCars) =>
-                prevCars.map((car) =>
-                    car.id === carId ? { ...car, ...data } : car
-                )
-            );
             setNormalizedCars((prevNormalizedCars) =>
                 prevNormalizedCars.map((car) =>
                     car.id === carId ? { ...car, ...data } : car
@@ -337,28 +330,27 @@ export default function CarsPage(params) {
             );
 
             setSelectedCar(null);
-            console.log(`Auto con ID ${carId} editado correctamente`);
+            // console.log(`Auto con ID ${carId} editado correctamente`);
         } catch (error) {
             console.error("Error al modificar el auto:", error);
         }
     };
 
-    const handleDelete = async (carId) => {
+    const handleDelete = async (carId: string) => {
         try {
-            const response = await CarService.delete(carId, token);
+            await CarService.delete(carId, token);
 
-            setCars((prevCars) => prevCars.filter((car) => car.id !== carId));
             setNormalizedCars((prevNormalizedCars) =>
                 prevNormalizedCars.filter((car) => car.id !== carId)
             );
             setSelectedCar(null);
-            console.log(`Auto con ID ${carId} eliminado correctamente`);
+            // console.log(`Auto con ID ${carId} eliminado correctamente`);
         } catch (error) {
             console.error("Error al eliminar el auto:", error);
         }
     };
 
-    const handleDataFromChild = (data) => {
+    const handleDataFromChild = (data: object) => {
         setManagementData(data);
     };
 
@@ -591,19 +583,6 @@ export default function CarsPage(params) {
                         {new Date(car.created_at).toLocaleString()}
                     </div>
                 );
-            // case "user_role":
-            //     return (
-            //         <Chip
-            //             classNames={{
-            //                 base: [cellValue === 'admin' ? styles.chipBaseAdmin : styles.chipBaseClient],
-            //                 content: styles.chipContent,
-            //             }}
-            //             startContent={cellValue === 'admin' ? <RiAdminLine /> : <RiUserLine />}
-            //             size="sm"
-            //             variant="flat">
-            //             {cellValue}
-            //         </Chip>
-            //     );
             case "actions":
                 return (
                     <div className={styles.columnActions}>
@@ -640,10 +619,9 @@ export default function CarsPage(params) {
         const findCars = async () => {
             try {
                 const response = await CarService.findAll(token);
-                console.log(response)
-                setCars(response);
+                // console.log(response)
                 setNormalizedCars(response.map(normalizeCarData))
-                console.log('Formato normalizado', response.map(normalizeCarData))
+                // console.log('Formato normalizado', response.map(normalizeCarData))
             } catch (error) {
                 if (error instanceof Error) {
                     console.log(error)
@@ -675,9 +653,6 @@ export default function CarsPage(params) {
                     data={normalizedCars}
                     isPossibleCreate={true}
                     onOpen={onModalCreateOpen}
-                    isOpen={isModalCreateOpen}
-                    onClose={onModalCreateClose}
-                    onCreate={() => console.log('creando...')}
                 />
             </div>
             <ModalDelete
@@ -685,15 +660,17 @@ export default function CarsPage(params) {
                 onClose={onModalDeleteClose}
                 id={selectedCar?.id || ''}
                 onDelete={handleDelete}
+                sendDataToParent={handleDataFromChild}
             />
             <ModalEdit
                 isOpen={isModalEditOpen}
                 onClose={onModalEditClose}
-                data={selectedCarEdit}
+                data={selectedCarEdit || {}}
                 fieldTypes={fieldTypes}
                 editableFields={editableFields}
                 idKey={'id'}
                 onEdit={handleEdit}
+                sendDataToParent={handleDataFromChild}
             />
             <ModalCreate
                 isOpen={isModalCreateOpen}
