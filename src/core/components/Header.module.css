@@ -84,8 +84,8 @@
     align-items: center;
     justify-content: flex-end;
 }
-
-.headerButtonContainer .navbar a {
+.headerButtonContainer .navbar a,
+.headerButtonContainer .navbar div{
     position: relative;
     height: 1.5rem;
 
@@ -95,14 +95,24 @@
     white-space: nowrap;
     color: var(--light-gray);
 
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
     cursor: pointer;
 }
+.headerButtonContainer .navbar div svg{
+    font-size: 1.5rem;
+    color: var(--light-gray);
+}
 
-.headerButtonContainer .navbar a::before{
+.headerButtonContainer .navbar div::before{
     content: '';
     
     position: absolute;
-    bottom: 0;
+    bottom: -.5rem;
     left: 0;
     width: 0;
     height: 4px;
@@ -111,7 +121,7 @@
     transition: all .3s ease;
 }
 
-.headerButtonContainer .navbar a:hover::before{
+.headerButtonContainer .navbar div:hover::before{
     width: 100%;
 }
 
