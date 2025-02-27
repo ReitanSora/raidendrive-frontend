@@ -6,7 +6,7 @@ interface RegisterData {
     user_password: string,
 }
 
-const BASE_URL = 'http://127.0.0.1:8080/user';
+const BASE_URL = 'http://localhost/apilogin/user';
 
 export const UserService = {
     emailUsed: async (email: string) => {

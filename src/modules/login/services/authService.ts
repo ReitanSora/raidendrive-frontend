@@ -5,7 +5,7 @@ interface LoginData {
     password: string,
 }
 
-const BASE_URL = 'http://127.0.0.1:8080/auth';
+const BASE_URL = 'http://localhost/apilogin/auth';
 
 export const AuthService = {
     login: async (data: LoginData) => {
