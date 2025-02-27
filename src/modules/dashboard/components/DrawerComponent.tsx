@@ -71,7 +71,7 @@ export default function DrawerComponent({isOpen, onOpenChange}) {
                             </div>
                         </Link>
                         <Divider orientation="horizontal" className={styles.divider} />
-                        <Link to={'/admin/dashboard'}>
+                        <Link to={'/admin/reports'}>
                             <div className={styles.optionContainer}>
                                 Reportes
                             </div>
