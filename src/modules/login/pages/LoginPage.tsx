@@ -10,6 +10,7 @@ import { IoMdInformationCircle } from 'react-icons/io';
 import { validateEmail } from '../utils/validations';
 import { AuthService } from '../services/authService';
 import { useAuth } from '../../../context/AuthContext';
+import { AuthLogService } from '../../../services/authLogService';
 
 function LoginCard({ email, setEmail, password, setPassword, handleSubmit }) {
 
@@ -157,6 +158,8 @@ export default function LoginPage(params) {
         try {
             setIsLoading(true);
             const token = await AuthService.login({ email: email, password: password });
+            const response = await AuthLogService.login(token.accessToken);
+            // console.log(response);
             login(token);
         } catch (error) {
             if (error instanceof Error) {
