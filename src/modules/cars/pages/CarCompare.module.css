@@ -47,10 +47,10 @@
     align-self: center;
 }
 
-.contentContainer .contentTitle h2{
-    font-family: 'Montserrat', serif;
-    font-size: x-large;
-    color: var(--jet-gray);
+.contentContainer .contentTitle span{
+    font-family: 'Exo 2', monospace;
+    font-size: 2rem;
+    color: var(--mid-gray);
 }
 
 .comparationContainer{
@@ -82,9 +82,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.dropMenuContainer {
 }
 
 .contentContainer .infoContainer .dropMenuContainer .dropMenuButton{
@@ -197,7 +194,7 @@
     font-size: medium;
     font-family: "Montserrat", serif;
     font-weight: bold;
-    color: var(--jet-gray);
+    color: var(--mid-gray);
     margin-bottom: 30px;
     
 }
@@ -213,4 +210,5 @@
 .carSpec span:nth-child(2n){
     text-align: right;
     font-weight: normal;
+    color: var(--light-gray);
 }
