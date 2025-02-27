@@ -1,19 +1,20 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { AuthService } from "../modules/login/services/authService";
+import { AuthLogService } from "../services/authLogService";
 
-const AuthContext = createContext();
+const AuthContext = createContext(null);
 
 export const useAuth = () => {
     return useContext(AuthContext)
 }
 
-export const AuthProvider = ({ children }) => {
+export const AuthProvider = ({ children }: never) => {
     const [token, setToken] = useState<string | null>();
     const [user, setUser] = useState<object | null>();
     const [isAdmin, setIsAdmin] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
 
-    const login = async (userData) => {
+    const login = async (userData: {accessToken: string}) => {
         setToken(userData.accessToken);
         const response = await AuthService.secured(userData.accessToken);
         if (response) {
@@ -23,7 +24,8 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
-    const logout = () => {
+    const logout = async () => {
+        await AuthLogService.logout(token);
         setToken(null);
         setUser(null);
         setIsAdmin(false);
@@ -32,7 +34,6 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         const validateToken = async () => {
-
             try {
                 const userToken = window.localStorage.getItem('loggedUserToken');
                 if (userToken) {
