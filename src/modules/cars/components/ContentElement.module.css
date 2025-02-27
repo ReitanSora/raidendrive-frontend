@@ -4,6 +4,8 @@
     background-color: var(--gunmetal-gray);
     padding: 10px;
 
+    text-decoration: none;
+
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -12,7 +14,7 @@
     /* border: 1px solid var(--mid-gray); */
     border-radius: 0.5rem;
     
-    transition: all 0.3s ease-in-out;
+    transition: all .3s ease;
     cursor: pointer;
 }
 
@@ -24,9 +26,6 @@
 
 .elementContainer .elementTitleContainer {
     width: 100%;
-
-    display: flex;
-    /* background-color: var(--jet-gray); */
 }
 
 .elementContainer .elementTitleContainer .elementTitle {

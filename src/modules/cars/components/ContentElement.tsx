@@ -1,12 +1,11 @@
+import { Link } from "react-router-dom";
 import AnimatedImage from "./AnimatedImage";
 import styles from './ContentElement.module.css';
 
-export default function ContentElement({ element, index, onClickEvent }) {
+export default function ContentElement({ element, index}) {
 
     return (
-        <div className={styles.elementContainer} key={`elementContainer-${index}`} onClick={() => {
-            onClickEvent();
-        }}>
+        <Link to={`/car/${index}`} className={styles.elementContainer} key={`elementContainer-${index}`}>
             <div className={styles.elementTitleContainer} key={`elementTitleContainer-${index}`}>
                 <div className={styles.elementTitle} key={`elementTitle-${index}`}>
                     <span key={`elementTitle-${index}`}>{element.brand}</span>
@@ -17,6 +16,6 @@ export default function ContentElement({ element, index, onClickEvent }) {
                 <span>{element.model}</span>
                 <span>$ {element.details.price}</span>
             </div>
-        </div >
+        </Link>
     );
 };

@@ -1,0 +1,121 @@
+
+/* DropDown */
+.createButton,
+.dropDownTriggerPages,
+.dropDownTrigger {
+    width: 150px;
+    background-color: color-mix(in srgb, var(--mid-gray) 40%, transparent);
+    padding: 7px 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border: none;
+    border-radius: .5rem;
+
+    transition: all .2s ease;
+    cursor: pointer;
+    outline: none;
+}
+.createButton{
+    background-color: color-mix(in srgb, var(--success) 60%, transparent);
+}
+.createButton:hover,
+.dropDownTriggerPages:hover,
+.dropDownTrigger:hover {
+    background-color: color-mix(in srgb, var(--mid-gray) 30%, transparent);
+}
+
+.dropDownTriggerPages {
+    width: 50px;
+    background-color: transparent;
+}
+
+.createButton button,
+.dropDownTriggerPages button,
+.dropDownTrigger button {
+    background-color: transparent;
+
+    font-family: 'Exo 2', monospace;
+    font-size: 1rem;
+    vertical-align: middle;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--light-gray);
+
+    overflow: hidden;
+
+    border: none;
+
+    cursor: pointer;
+    outline: none;
+}
+
+.createButton svg,
+.dropDownTriggerPages svg,
+.dropDownTrigger svg {
+    font-size: 18px;
+    color: var(--light-gray);
+}
+
+.dropDownMenuBase {
+    max-height: 400px;
+    background-color: color-mix(in srgb, var(--mid-gray) 70%, #000);
+    margin: 0;
+
+    
+    overflow-y: auto;
+
+    border-radius: .5rem;
+}
+
+.dropDownMenuEmptyContent,
+.dropDownMenuList {
+    margin: 0;
+    padding: 5px 10px;
+
+    list-style: none;
+}
+
+.dropDownItemBase {
+    position: relative;
+    width: 200px;
+    height: 3rem;
+    margin: 10px 0;
+    padding: 0 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    border-radius: .5rem;
+
+    cursor: pointer;
+    outline: none;
+}
+
+.dropDownItemBase:hover {
+    background-color: color-mix(in srgb, var(--mid-gray) 100%, #000);
+}
+
+.dropDownItemWrapper {
+    width: 100%;
+}
+
+.dropDownItemTitle {
+    position: relative;
+    font-family: 'Exo 2', monospace;
+    font-size: 1.1rem;
+    text-transform: none;
+    color: var(--light-white);
+}
+
+.dropDownItemSelectedIcon {
+    position: absolute;
+    right: 10px;
+
+    width: 20px;
+    color: var(--light-white);
+    /* Color del ícono */
+}

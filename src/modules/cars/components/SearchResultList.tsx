@@ -6,7 +6,7 @@ export default function SearchResultList({ results }) {
         <div className={styles.resultListContainer}>
             {results.map((element, index) => {
                 return (
-                    <Link className={styles.linkContainer} to={`/car/${element.id}`}  key={`resultElement-${index}`}>
+                    <Link className={styles.linkContainer} to={`/car/${element.id}`} key={`resultElement-${index}`}>
                         <div className={styles.resultElement}>
                             {element.brand} {element.model}
                         </div>
