@@ -20,10 +20,10 @@ export default function PublicAndClientRoute({ children }) {
     }
 
     if (isAdmin) {
-        console.log('Usuario admin detectado, redirigiendo a /admin/dashboard');
+        // console.log('Usuario admin detectado, redirigiendo a /admin/dashboard');
         return <Navigate to="/admin/dashboard" replace />;
     }
 
-    console.log('Acceso permitido: Usuario no autenticado o cliente');
+    // console.log('Acceso permitido: Usuario no autenticado o cliente');
     return children;
 };

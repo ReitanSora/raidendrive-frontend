@@ -20,17 +20,17 @@ export default function ProtectedRoute({ children, requiredRole }) {
     }
 
     if (!user) {
-        console.log('Usuario no autenticado, redirigiendo a /');
+        // console.log('Usuario no autenticado, redirigiendo a /');
         return <Navigate to="/" replace />;
     }
 
     if (requiredRole === 'admin' && !isAdmin) {
-        console.log('Acceso denegado: Se requiere rol de administrador');
+        // console.log('Acceso denegado: Se requiere rol de administrador');
         return <Navigate to={'/'} replace />;
     }
 
     if (requiredRole === 'client' && isAdmin) {
-        console.log('Acceso denegado: Usuario admin intentando acceder a ruta de cliente');
+        // console.log('Acceso denegado: Usuario admin intentando acceder a ruta de cliente');
         return <Navigate to="/admin/dashboard" replace />;
     }
 

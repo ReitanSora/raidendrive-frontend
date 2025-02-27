@@ -21,10 +21,10 @@ export default function PublicRoute({ children }) {
 
     if (user) {
         if (isAdmin) {
-            console.log('Usuario admin autenticado, redirigiendo a /admin/dashboard');
+            // console.log('Usuario admin autenticado, redirigiendo a /admin/dashboard');
             return <Navigate to="/admin/dashboard" replace />;
         } else {
-            console.log('Usuario cliente autenticado, redirigiendo a /');
+            // console.log('Usuario cliente autenticado, redirigiendo a /');
             return <Navigate to="/" replace />;
         }
     }
